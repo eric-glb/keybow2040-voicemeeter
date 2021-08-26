@@ -3,7 +3,6 @@
 ### Keybow2040 tailored for my needs:
   - USB HID *and* Midi keys to pilot Voice Meeter Banana and OS media control
   - Visual feedback when muting/unmuting mic
-                                 eric_glb - 2021/08/24
 
 ### From:
 - https://www.tomshardware.com/how-to/build-rp2040-powered-shortcut-keypad
