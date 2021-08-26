@@ -16,8 +16,6 @@ https://user-images.githubusercontent.com/89578893/130957119-04bb56d3-d831-4dda-
     https://vb-audio.com/Voicemeeter/banana.htm
 - VB-Audio Virtual Audio Cable:
     https://vb-audio.com/Cable/index.htm
-- Audio Router to route Spotify to Virtual Audio Cable:
-    https://github.com/audiorouterdev/audio-router
 
 ### Debug:
 - Use PuTTY on Serial line COM4, speed 115200 bauds
