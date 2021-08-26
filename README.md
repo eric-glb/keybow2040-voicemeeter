@@ -10,11 +10,11 @@ https://user-images.githubusercontent.com/89578893/130957119-04bb56d3-d831-4dda-
 - https://www.tomshardware.com/how-to/build-rp2040-powered-shortcut-keypad
 
 ### My installation relies on:
-- Pimoroni keybow2040-circuitpython:
+- Pimoroni keybow2040-circuitpython:  
     https://github.com/pimoroni/keybow2040-circuitpython
-- VB-Audio Voice Meeter Banana:
+- VB-Audio Voice Meeter Banana:  
     https://vb-audio.com/Voicemeeter/banana.htm
-- VB-Audio Virtual Audio Cable to route Spotify to a specific input, using the system mixer configuration:
+- VB-Audio Virtual Audio Cable to route Spotify to a specific input, using the system mixer configuration:  
     https://vb-audio.com/Cable/index.htm
 
 ### Debug:
