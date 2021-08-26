@@ -4,6 +4,8 @@
   - USB HID *and* Midi keys to pilot Voice Meeter Banana and OS media control
   - Visual feedback when muting/unmuting mic
 
+https://user-images.githubusercontent.com/89578893/130957119-04bb56d3-d831-4dda-bfc8-a24a935e4dee.mp4
+
 ### From:
 - https://www.tomshardware.com/how-to/build-rp2040-powered-shortcut-keypad
 
