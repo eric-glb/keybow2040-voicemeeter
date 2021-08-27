@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VBAudioVoicemeeterMIDIMapping>
+<VoiceMeeterMidiMap>
+	<MidiMapName>keybow</MidiMapName>
+	<MidiMapItem id='InGainFader1' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='InMute1' b1='90' b2='24' b3='7F' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='InSolo1' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='InComp1' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='InGate1' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='InGainFader2' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='InMute2' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='InSolo2' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='InComp2' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='InGate2' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='InGainFader3' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='InMute3' b1='90' b2='28' b3='7F' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='InSolo3' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='InComp3' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='InGate3' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VInGainFader1' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VInMute1' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VInSolo1' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VInMuteC1' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VIn1EQHigh' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VIn1EQMed' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VIn1EQBass' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VInGainFader2' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VInMute2' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VInSolo2' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VInMuteC2' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VIn2EQHigh' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VIn2EQMed' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VIn2EQBass' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='TapeREW' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='TapeFF' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='TapeRePlay' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='TapeGain' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='OutGainFader1' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='OutMute1' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='OutEqOn1' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='OutGainFader2' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='OutMute2' b1='90' b2='2C' b3='7F' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='OutEqOn2' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='OutGainFader3' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='OutMute3' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='OutEqOn3' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VOutGainFader1' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VOutMute1' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VOutEqOn1' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VOutGainFader2' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VOutMute2' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='VOutEqOn2' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='TapePlay' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='TapeRec' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='TapeStop' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='TapeREW' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='TapeFF' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='TapeRePlay' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+	<MidiMapItem id='ToggleB1B2s1' b1='00' b2='00' b3='00' b4='00' b5='00' b6='00' coder='0' ptt='0' />
+</VoiceMeeterMidiMap>
+</VBAudioVoicemeeterMIDIMapping>
