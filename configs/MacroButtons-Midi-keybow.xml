@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VBAudioVoicemeeterMacroButtonMap>
+<MacroButtonConfiguration x0='300' y0='756' dx='320' dy='305' />
+	<MacroButton index='1' type='0' color='0' key='0' ctrl='0' shift='0' alt='0' anyway='0' exclusive='0' trigger='0' xinput='0'>
+		<MB_MIDI b1='90' b2='2A' b3='7F' b4='00' b5='00' b6='00' />
+		<MB_TRIGGER tchannel='0' tin='0.0' tout='0.0' tmsHold='100' tafterMute='0' />
+		<MB_XINPUT nctrl='0' nbutton='0' />
+		<MB_Name>Volume Up</MB_Name>
+		<MB_Subname>Cable</MB_Subname>
+		<MB_InitRequest></MB_InitRequest>
+		<MB_OnRequest>Strip(2).gain+=4.0;</MB_OnRequest>
+		<MB_OffRequest></MB_OffRequest>
+	</MacroButton>
+	<MacroButton index='2' type='0' color='0' key='0' ctrl='0' shift='0' alt='0' anyway='0' exclusive='0' trigger='0' xinput='0'>
+		<MB_MIDI b1='90' b2='2E' b3='7F' b4='00' b5='00' b6='00' />
+		<MB_TRIGGER tchannel='0' tin='0.0' tout='0.0' tmsHold='100' tafterMute='0' />
+		<MB_XINPUT nctrl='0' nbutton='0' />
+		<MB_Name>Volume Up</MB_Name>
+		<MB_Subname>Headphones</MB_Subname>
+		<MB_InitRequest></MB_InitRequest>
+		<MB_OnRequest>Bus(1).gain+=4.0;</MB_OnRequest>
+		<MB_OffRequest></MB_OffRequest>
+	</MacroButton>
+	<MacroButton index='11' type='0' color='0' key='0' ctrl='0' shift='0' alt='0' anyway='0' exclusive='0' trigger='0' xinput='0'>
+		<MB_MIDI b1='90' b2='29' b3='7F' b4='00' b5='00' b6='00' />
+		<MB_TRIGGER tchannel='0' tin='0.0' tout='0.0' tmsHold='100' tafterMute='0' />
+		<MB_XINPUT nctrl='0' nbutton='0' />
+		<MB_Name>Volume Down</MB_Name>
+		<MB_Subname>Cable</MB_Subname>
+		<MB_InitRequest></MB_InitRequest>
+		<MB_OnRequest>Strip(2).gain-=4.0;</MB_OnRequest>
+		<MB_OffRequest></MB_OffRequest>
+	</MacroButton>
+	<MacroButton index='12' type='0' color='0' key='0' ctrl='0' shift='0' alt='0' anyway='0' exclusive='0' trigger='0' xinput='0'>
+		<MB_MIDI b1='90' b2='2D' b3='7F' b4='00' b5='00' b6='00' />
+		<MB_TRIGGER tchannel='0' tin='0.0' tout='0.0' tmsHold='100' tafterMute='0' />
+		<MB_XINPUT nctrl='0' nbutton='0' />
+		<MB_Name>Volume Down</MB_Name>
+		<MB_Subname>Headphones</MB_Subname>
+		<MB_InitRequest></MB_InitRequest>
+		<MB_OnRequest>Bus(0).gain-=4.0;</MB_OnRequest>
+		<MB_OffRequest></MB_OffRequest>
+	</MacroButton>
+</MacroButtonConfiguration>
+</VBAudioVoicemeeterMacroButtonMap>
