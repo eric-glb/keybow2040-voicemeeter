@@ -16,7 +16,7 @@ https://user-images.githubusercontent.com/89578893/131130065-ba3a7a3c-cb5e-4299-
 And also:
 - Mute switch for Teams;
 - Mute switch for Google Meet;
-- Multimedia: Previous, Next Track and Play/Pause.
+- Multimedia: Previous, Next Track and Play/Pause; Volume keys (hooked to A1 output level in Voice Meeter).
 
 NB:  
 As Mute switch for Teams is keyboard layout dependend (CTRL+SHIFT+M), I use a french AZERTY mapping for adafruit_hid.  
