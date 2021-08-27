@@ -1,11 +1,26 @@
 # keybow2040-voicemeeter
 
 ### Keybow2040 tailored for my needs:
-  - USB HID *and* Midi keys to pilot Voice Meeter Banana, OS media control, Meet and Teams mute switchs
-  - Visual feedback when muting/unmuting mic
-  - standby mode (all leds off) if not used for a certain amount of time
+  - USB HID *and* Midi keys to pilot Voice Meeter Banana, OS media control, Meet and Teams mute switchs;
+  - Visual feedback when muting/unmuting mic;
+  - standby mode (all leds off) if not used for a certain amount of time (10 min).
 
-https://user-images.githubusercontent.com/89578893/130957119-04bb56d3-d831-4dda-bfc8-a24a935e4dee.mp4
+### Demonstration
+
+https://user-images.githubusercontent.com/89578893/131130065-ba3a7a3c-cb5e-4299-a4bc-061b160bbfd6.mp4
+
+### What it does control 
+
+![voicemeeter-keybow](https://user-images.githubusercontent.com/89578893/131132043-4670462a-669e-4495-9d9d-ae1357e7f5e8.png)
+
+And also:
+- Mute switch for Teams;
+- Mute switch for Google Meet;
+- Multimedia: Previous, Next Track and Play/Pause.
+
+NB:  
+As Mute switch for Teams is keyboard layout dependend (CTRL+SHIFT+M), I use a french AZERTY mapping for adafruit_hid.  
+Please read the specific [README.md](lib/adafruit_hid_fr/README.md) for details.
 
 ### Inspiration taken from:
 - https://www.tomshardware.com/how-to/build-rp2040-powered-shortcut-keypad
@@ -16,12 +31,12 @@ https://user-images.githubusercontent.com/89578893/130957119-04bb56d3-d831-4dda-
 - VB-Audio Voice Meeter Banana (worth the price):  
     https://vb-audio.com/Voicemeeter/banana.htm
 - VB-Audio Macro Buttons (installed with Voice Meeter):  
-    See [Voice Meeter Banana documentation](https://vb-audio.com/Voicemeeter/VoicemeeterBanana_UserManual.pdf), p. 37
+    See [Voice Meeter Banana documentation](https://vb-audio.com/Voicemeeter/VoicemeeterBanana_UserManual.pdf), p. 37.
 - VB-Audio Virtual Audio Cable to route Spotify client to VoiceMeeter input #3, using the system mixer configuration:  
     https://vb-audio.com/Cable/index.htm
 
 ### Debug:
-- Use PuTTY on Serial line COM4 (YMMV), speed 115200 bauds
+- Use PuTTY on Serial line COM4 (YMMV), speed 115200 bauds.
 
 ### My VB-Audio Voice Meeter Banana settings:
 
@@ -40,7 +55,6 @@ Basically:
     Mute Strip #1 -> Note on C1 (36)
     Mute Strip #3 -> Note On E1 (40)
     Mute BUS A2   -> Note On G#1 (44)
-
 
 ### My VB-Audio Macro Buttons settings:
 
