@@ -38,7 +38,7 @@
 		<MB_Name>Volume Down</MB_Name>
 		<MB_Subname>Headphones</MB_Subname>
 		<MB_InitRequest></MB_InitRequest>
-		<MB_OnRequest>Bus(0).gain-=4.0;</MB_OnRequest>
+		<MB_OnRequest>Bus(1).gain-=4.0;</MB_OnRequest>
 		<MB_OffRequest></MB_OffRequest>
 	</MacroButton>
 </MacroButtonConfiguration>
