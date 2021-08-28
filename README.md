@@ -58,7 +58,7 @@ Basically:
 
 ### My VB-Audio Macro Buttons settings:
 
-Use [configs/MacroButtons-Midi-keybow](configs/MacroButtons-Midi-keybow) for the Voice Meeter MIDI config.
+Use [configs/MacroButtons-Midi-keybow.xml](configs/MacroButtons-Midi-keybow.xml) for the Voice Meeter MIDI config.
 
 ### Key mapping:
 
