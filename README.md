@@ -62,16 +62,16 @@ Use [configs/MacroButtons-Midi-keybow.xml](configs/MacroButtons-Midi-keybow.xml)
 
 ### Key mapping:
 
-    ┌─┬────────────┬─┬────────────┬──┬────────────────┬──┬──────────────┐
-    │3│Google Meet │7│Previous    │11│Next            │15│Play/Pause    │
-    │ │Mute Toggle │ │            │  │                │  │              │
-    ├─┼────────────┼─┼────────────┼──┼────────────────┼──┼──────────────┤
-    │2│Teams       │6│MIDI Cable  │10│MIDI Headphones │14│Speakers      │
-    │ │Mute Toggle │ │Volume Up   │  │Volume Up       │  │Volume Up     │
-    ├─┼────────────┼─┼────────────┼──┼────────────────┼──┼──────────────┤
-    │1│            │5│MIDI Cable  │ 9│MIDI Headphones │13│Speakers      │
-    │ |            │ │Volume Down │  │Volume Down     │  │Volume Down   │
-    ├─┼────────────┼─┼────────────┼──┼────────────────┼──┼──────────────┤
-    │0│MIDI Mic    │4│MIDI Cable  │ 8│MIDI Headphones │12│Speakers      │
-    │ │Mute Toggle │ │Mute Toggle │  │Mute Toggle     │  │Mute Toggle   │
-    └─┴────────────┴─┴────────────┴──┴────────────────┴──┴──────────────┘
+    ┌─┬────────────┬─┬───────────┬──┬────────────────┬──┬──────────────┐
+    │3│Google Meet │7│Previous   │11│Next            │15│Play/Pause    │
+    │ │Mute        │ │           │  │                │  │              │
+    ├─┼────────────┼─┼───────────┼──┼────────────────┼──┼──────────────┤
+    │2│Teams       │6│MIDI Cable │10│MIDI Headphones │14│Speakers      │
+    │ │Mute        │ │Volume Up  │  │Volume Up       │  │Volume Up     │
+    ├─┼────────────┼─┼───────────┼──┼────────────────┼──┼──────────────┤
+    │1│Reset Voice │5│MIDI Cable │ 9│MIDI Headphones │13│Speakers      │
+    │ |Meeter conf │ │Volume Down│  │Volume Down     │  │Volume Down   │
+    ├─┼────────────┼─┼───────────┼──┼────────────────┼──┼──────────────┤
+    │0│MIDI Mic    │4│MIDI Cable │ 8│MIDI Headphones │12│Speakers      │
+    │ │Mute        │ │Mute       │  │Mute            │  │Mute          │
+    └─┴────────────┴─┴───────────┴──┴────────────────┴──┴──────────────┘

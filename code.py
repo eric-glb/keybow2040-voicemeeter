@@ -47,8 +47,8 @@ print("""
 │2│Teams       │6│MIDI Cable │10│MIDI Headphones │14│Speakers      │
 │ │Mute        │ │Volume Up  │  │Volume Up       │  │Volume Up     │
 ├─┼────────────┼─┼───────────┼──┼────────────────┼──┼──────────────┤
-│1│            │5│MIDI Cable │ 9│MIDI Headphones │13│Speakers      │
-│ |            │ │Volume Down│  │Volume Down     │  │Volume Down   │
+│1│Reset Voice │5│MIDI Cable │ 9│MIDI Headphones │13│Speakers      │
+│ |Meeter conf │ │Volume Down│  │Volume Down     │  │Volume Down   │
 ├─┼────────────┼─┼───────────┼──┼────────────────┼──┼──────────────┤
 │0│MIDI Mic    │4│MIDI Cable │ 8│MIDI Headphones │12│Speakers      │
 │ │Mute        │ │Mute       │  │Mute            │  │Mute          │
@@ -56,7 +56,8 @@ print("""
 """)
 
 # Keys categories
-blank = [1]
+blank = []
+reset = [1]
 mic = [0]
 teams = [2]
 meet = [3]
@@ -67,9 +68,10 @@ volume = [5,6,9,10,13,14]
 control = [7,11]
 playpause = [15]
 
+
 # Sleep mode for keys
 keybow.led_sleep_enabled = True
-keybow.led_sleep_time = 600
+keybow.led_sleep_time = 900
 
 # Colors
 black = (0,0,0)
@@ -85,15 +87,18 @@ weak_green = (0,85,0)
 green = (0,255,0)
 weak_purple = (42,0,42)
 purple = (128,0,128)
+weak_yellow = (128,128,0)
+yellow = (255,255,0)
 
-# mute led status when starting (need to config things accordingly...)
-mic_muted = True
-cable_muted = False
-speakers_muted = False
-headphones_muted = True
 
-# bolean to get the mic key blinking when mic is unmuted
-mic_blink = False
+
+#mic_muted = True
+#cable_muted = False
+#speakers_muted = False
+#headphones_muted = True
+
+
+#mic_blink = False
 
 # Function for send Midi keypress
 def midi_send(key):
@@ -103,6 +108,22 @@ def midi_send(key):
     midi.send(NoteOn(note, velocity))
     midi.send(NoteOff(note, 0))
 
+def reset_config():
+    # mute led status when starting (need to config things accordingly...)
+    global mic_muted
+    global cable_muted
+    global speakers_muted
+    global headphones_muted
+    # bolean to get the mic key blinking when mic is unmuted
+    global mic_blink
+    # Values at boot time    
+    mic_muted = True
+    cable_muted = False
+    speakers_muted = False
+    headphones_muted = True
+    mic_blink = False
+    # Reset Voice Meeter config
+    midi_send(1)
 
 # Small animation when starting
 keybow.set_all(*black)
@@ -111,6 +132,8 @@ for i in range(5):
         key.set_led(*grey)
     for key in keys:
         key.set_led(*white)
+
+reset_config()
 
 while True:
     keybow.update()
@@ -134,6 +157,9 @@ while True:
 
         for i in playpause:
             keybow.keys[i].set_led(*weak_green)
+
+        for i in reset:
+            keybow.keys[i].set_led(*weak_yellow)
 
         for i in mic:
             if mic_muted:
@@ -171,8 +197,13 @@ while True:
         time.sleep(0.2)
         mic_muted = not mic_muted
 
-    elif keys[1].pressed:
-        pass
+    elif keys[1].held:
+        print('Reset Voice Meeter Banana Config key pressed')
+        keybow.keys[1].set_led(*yellow)
+        midi_send(1)
+        reset_config()
+        time.sleep(0.5)
+        keyboard.release_all()
 
     elif keys[2].pressed:
         print('Teams Mute key pressed')
