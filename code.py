@@ -42,13 +42,13 @@ midi = adafruit_midi.MIDI(midi_out=usb_midi.ports[1], out_channel=0)
 print("""
 ┌─┬────────────┬─┬───────────┬──┬────────────────┬──┬──────────────┐
 │3│Google Meet │7│Previous   │11│Next            │15│Play/Pause    │
-│ │Mute        │ │           │  │                │  │              │
+│ │Mute        │ │Track      │  │Track           │  │              │
 ├─┼────────────┼─┼───────────┼──┼────────────────┼──┼──────────────┤
-│2│Teams       │6│MIDI Cable │10│MIDI Headphones │14│Speakers      │
-│ │Mute        │ │Volume Up  │  │Volume Up       │  │Volume Up     │
+│2│Headphones  │6│MIDI Cable │10│MIDI Headphones │14│Speakers      │
+│ │Preset      │ │Volume Up  │  │Volume Up       │  │Volume Up     │
 ├─┼────────────┼─┼───────────┼──┼────────────────┼──┼──────────────┤
-│1│Switch for  │5│MIDI Cable │ 9│MIDI Headphones │13│Speakers      │
-│ |Configs     │ │Volume Down│  │Volume Down     │  │Volume Down   │
+│1│Speakers    │5│MIDI Cable │ 9│MIDI Headphones │13│Speakers      │
+│ |Preset      │ │Volume Down│  │Volume Down     │  │Volume Down   │
 ├─┼────────────┼─┼───────────┼──┼────────────────┼──┼──────────────┤
 │0│MIDI Mic    │4│MIDI Cable │ 8│MIDI Headphones │12│Speakers      │
 │ │Mute        │ │Mute       │  │Mute            │  │Mute          │
@@ -57,9 +57,8 @@ print("""
 
 # Keys categories
 blank = []
-switchconf = [1]
 mic = [0]
-teams = [2]
+switchconf = [1,2]
 meet = [3]
 cable = [4]
 headphones = [8]
@@ -100,52 +99,44 @@ def midi_send(key):
     midi.send(NoteOff(note, 0))
 
 def speakers_config():
-    # mute led status when starting (need to config things accordingly...)
     global mic_muted
     global cable_muted
     global speakers_muted
     global headphones_muted
-    # bolean to get the mic key blinking when mic is unmuted
     global mic_blink
-    # Values at boot time
     mic_muted = True
     cable_muted = False
     speakers_muted = False
     headphones_muted = True
     mic_blink = False
 
-
 def headphones_config():
-    # mute led status when starting (need to config things accordingly...)
     global mic_muted
     global cable_muted
     global speakers_muted
     global headphones_muted
-    # bolean to get the mic key blinking when mic is unmuted
     global mic_blink
-    # Values at boot time
     mic_muted = False
     cable_muted = False
     speakers_muted = True
     headphones_muted = False
     mic_blink = False
+ 
+def short_anim(): 
+    global keybow
+    keybow.set_all(*black)
+    for i in range(5):
+        for key in keys:
+            key.set_led(*grey)
+        for key in keys:
+            key.set_led(*white)
 
-
-# Small animation when starting
-keybow.set_all(*black)
-for i in range(5):
-    for key in keys:
-        key.set_led(*grey)
-    for key in keys:
-        key.set_led(*white)
-
-# pressed/held
-for i in switchconf:
-    keybow.keys[i].hold_time = 0.5
 
 # Speakers config at boot time
+short_anim()
 speakers_config()
 midi_send(1)
+
 
 while True:
     keybow.update()
@@ -160,9 +151,7 @@ while True:
 
         for i in control:
             keybow.keys[i].set_led(*weak_orange)
-
-        for i in teams:
-            keybow.keys[i].set_led(*weak_purple)
+            keybow.keys[i].set_led(*weak_orange)
 
         for i in meet:
             keybow.keys[i].set_led(*weak_purple)
@@ -209,33 +198,30 @@ while True:
         time.sleep(0.2)
         mic_muted = not mic_muted
 
-    elif keys[1].held:
+    elif keys[1].pressed:
         print('Speakers Config key pressed')
-        keybow.keys[1].set_led(*yellow)
+        keybow.set_all(*black)
+        keybow.set_all(*orange)
         midi_send(1)
         speakers_config()
-        time.sleep(1)
-        keyboard.release_all()
-
-    elif keys[1].pressed:
-        print('Headphones Config key pressed')
-        keybow.keys[1].set_led(*yellow)
-        midi_send(2)
-        headphones_config()
-        time.sleep(1)
+        time.sleep(0.2)
         keyboard.release_all()
 
     elif keys[2].pressed:
-        print('Teams Mute key pressed')
-        keybow.keys[2].set_led(*purple)
-        keyboard.send(Keycode.CONTROL, Keycode.SHIFT, layout.keycodes("m")[0])
+        print('Headphones Config key pressed')
+        keybow.set_all(*black)
+        keybow.set_all(*yellow)
+        midi_send(2)
+        headphones_config()
+        time.sleep(0.2)
         keyboard.release_all()
-        time.sleep(0.1)
 
     elif keys[3].pressed:
-        print('Google Meet Mute key pressed')
+        print('Google Meet key pressed')
         keybow.keys[3].set_led(*purple)
+        # Meet
         keyboard.send(Keycode.CONTROL, Keycode.D)
+        # For Teams it would be: keyboard.send(Keycode.CONTROL, Keycode.SHIFT, layout.keycodes("m")[0])
         keyboard.release_all()
         time.sleep(0.1)
 
