@@ -47,8 +47,8 @@ print("""
 │2│Teams       │6│MIDI Cable │10│MIDI Headphones │14│Speakers      │
 │ │Mute        │ │Volume Up  │  │Volume Up       │  │Volume Up     │
 ├─┼────────────┼─┼───────────┼──┼────────────────┼──┼──────────────┤
-│1│Reset Voice │5│MIDI Cable │ 9│MIDI Headphones │13│Speakers      │
-│ |Meeter conf │ │Volume Down│  │Volume Down     │  │Volume Down   │
+│1│Switch for  │5│MIDI Cable │ 9│MIDI Headphones │13│Speakers      │
+│ |Configs     │ │Volume Down│  │Volume Down     │  │Volume Down   │
 ├─┼────────────┼─┼───────────┼──┼────────────────┼──┼──────────────┤
 │0│MIDI Mic    │4│MIDI Cable │ 8│MIDI Headphones │12│Speakers      │
 │ │Mute        │ │Mute       │  │Mute            │  │Mute          │
@@ -57,7 +57,7 @@ print("""
 
 # Keys categories
 blank = []
-reset = [1]
+switchconf = [1]
 mic = [0]
 teams = [2]
 meet = [3]
@@ -91,15 +91,6 @@ weak_yellow = (128,128,0)
 yellow = (255,255,0)
 
 
-
-#mic_muted = True
-#cable_muted = False
-#speakers_muted = False
-#headphones_muted = True
-
-
-#mic_blink = False
-
 # Function for send Midi keypress
 def midi_send(key):
     start_note = 36
@@ -108,7 +99,7 @@ def midi_send(key):
     midi.send(NoteOn(note, velocity))
     midi.send(NoteOff(note, 0))
 
-def reset_config():
+def speakers_config():
     # mute led status when starting (need to config things accordingly...)
     global mic_muted
     global cable_muted
@@ -116,14 +107,29 @@ def reset_config():
     global headphones_muted
     # bolean to get the mic key blinking when mic is unmuted
     global mic_blink
-    # Values at boot time    
+    # Values at boot time
     mic_muted = True
     cable_muted = False
     speakers_muted = False
     headphones_muted = True
     mic_blink = False
-    # Reset Voice Meeter config
-    midi_send(1)
+
+
+def headphones_config():
+    # mute led status when starting (need to config things accordingly...)
+    global mic_muted
+    global cable_muted
+    global speakers_muted
+    global headphones_muted
+    # bolean to get the mic key blinking when mic is unmuted
+    global mic_blink
+    # Values at boot time
+    mic_muted = False
+    cable_muted = False
+    speakers_muted = True
+    headphones_muted = False
+    mic_blink = False
+
 
 # Small animation when starting
 keybow.set_all(*black)
@@ -133,7 +139,13 @@ for i in range(5):
     for key in keys:
         key.set_led(*white)
 
-reset_config()
+# pressed/held
+for i in switchconf:
+    keybow.keys[i].hold_time = 0.5
+
+# Speakers config at boot time
+speakers_config()
+midi_send(1)
 
 while True:
     keybow.update()
@@ -158,7 +170,7 @@ while True:
         for i in playpause:
             keybow.keys[i].set_led(*weak_green)
 
-        for i in reset:
+        for i in switchconf:
             keybow.keys[i].set_led(*weak_yellow)
 
         for i in mic:
@@ -198,11 +210,19 @@ while True:
         mic_muted = not mic_muted
 
     elif keys[1].held:
-        print('Reset Voice Meeter Banana Config key pressed')
+        print('Speakers Config key pressed')
         keybow.keys[1].set_led(*yellow)
         midi_send(1)
-        reset_config()
-        time.sleep(0.5)
+        speakers_config()
+        time.sleep(1)
+        keyboard.release_all()
+
+    elif keys[1].pressed:
+        print('Headphones Config key pressed')
+        keybow.keys[1].set_led(*yellow)
+        midi_send(2)
+        headphones_config()
+        time.sleep(1)
         keyboard.release_all()
 
     elif keys[2].pressed:
