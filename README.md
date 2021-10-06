@@ -14,7 +14,7 @@ https://user-images.githubusercontent.com/89578893/131130065-ba3a7a3c-cb5e-4299-
 ![voicemeeter-keybow](https://user-images.githubusercontent.com/89578893/131132043-4670462a-669e-4495-9d9d-ae1357e7f5e8.png)
 
 And also:
-- Mute switch for Teams;
+- Speakers and Headphones presets;
 - Mute switch for Google Meet;
 - Multimedia: Previous, Next Track and Play/Pause; Volume keys (hooked to A1 output level in Voice Meeter).
 
@@ -64,13 +64,13 @@ Use [configs/MacroButtons-Midi-keybow.xml](configs/MacroButtons-Midi-keybow.xml)
 
     ┌─┬────────────┬─┬───────────┬──┬────────────────┬──┬──────────────┐
     │3│Google Meet │7│Previous   │11│Next            │15│Play/Pause    │
-    │ │Mute        │ │           │  │                │  │              │
+    │ │Mute        │ │Track      │  │Track           │  │              │
     ├─┼────────────┼─┼───────────┼──┼────────────────┼──┼──────────────┤
-    │2│Teams       │6│MIDI Cable │10│MIDI Headphones │14│Speakers      │
-    │ │Mute        │ │Volume Up  │  │Volume Up       │  │Volume Up     │
+    │2│Headphones  │6│MIDI Cable │10│MIDI Headphones │14│Speakers      │
+    │ │Preset      │ │Volume Up  │  │Volume Up       │  │Volume Up     │
     ├─┼────────────┼─┼───────────┼──┼────────────────┼──┼──────────────┤
-    │1│Reset Voice │5│MIDI Cable │ 9│MIDI Headphones │13│Speakers      │
-    │ |Meeter conf │ │Volume Down│  │Volume Down     │  │Volume Down   │
+    │1│Speakers    │5│MIDI Cable │ 9│MIDI Headphones │13│Speakers      │
+    │ |Preset      │ │Volume Down│  │Volume Down     │  │Volume Down   │
     ├─┼────────────┼─┼───────────┼──┼────────────────┼──┼──────────────┤
     │0│MIDI Mic    │4│MIDI Cable │ 8│MIDI Headphones │12│Speakers      │
     │ │Mute        │ │Mute       │  │Mute            │  │Mute          │
