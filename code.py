@@ -67,7 +67,6 @@ volume = [5,6,9,10,13,14]
 control = [7,11]
 playpause = [15]
 
-
 # Sleep mode for keys
 keybow.led_sleep_enabled = True
 keybow.led_sleep_time = 900
@@ -89,6 +88,8 @@ purple = (128,0,128)
 weak_yellow = (128,128,0)
 yellow = (255,255,0)
 
+# debounce sleep time
+sleep_time = 0.5
 
 # Function for send Midi keypress
 def midi_send(key):
@@ -103,41 +104,40 @@ def speakers_config():
     global cable_muted
     global speakers_muted
     global headphones_muted
-    global mic_blink
     mic_muted = True
     cable_muted = False
     speakers_muted = False
     headphones_muted = True
-    mic_blink = False
 
 def headphones_config():
     global mic_muted
     global cable_muted
     global speakers_muted
     global headphones_muted
-    global mic_blink
     mic_muted = False
     cable_muted = False
     speakers_muted = True
     headphones_muted = False
-    mic_blink = False
  
 def short_anim(): 
     global keybow
-    keybow.set_all(*black)
-    for i in range(5):
-        for key in keys:
-            key.set_led(*grey)
-        for key in keys:
-            key.set_led(*white)
-
+    for i in [weak_purple, purple,
+              weak_blue, blue,
+              weak_green, green,
+              weak_yellow, yellow,
+              weak_orange, orange,
+              weak_red, red,
+              white, grey, black]:
+        keybow.set_all(*i)
+        time.sleep(0.05)
 
 # Speakers config at boot time
 short_anim()
 speakers_config()
 midi_send(1)
+mic_blink = False
 
-
+# Main loop
 while True:
     keybow.update()
 
@@ -166,12 +166,12 @@ while True:
             if mic_muted:
                 keybow.keys[i].set_led(*weak_red)
             else:
-                mic_blink = not mic_blink
                 if mic_blink:
                     keybow.keys[i].set_led(*green)
                 else:
                     keybow.keys[i].set_led(*weak_green)
-
+                mic_blink = not mic_blink
+                
         for i in cable:
             if cable_muted:
                 keybow.keys[i].set_led(*weak_red)
@@ -193,112 +193,99 @@ while True:
     # Actions
     if keys[0].pressed:
         print('MIDI Mic Mute key pressed')
-        keybow.set_all(*white)
+        keybow.set_all(*red)
         midi_send(0)
-        time.sleep(0.2)
         mic_muted = not mic_muted
+        time.sleep(sleep_time)
 
     elif keys[1].pressed:
         print('Speakers Config key pressed')
-        keybow.set_all(*black)
-        keybow.set_all(*orange)
+        keybow.set_all(*green)
         midi_send(1)
         speakers_config()
-        time.sleep(0.2)
-        keyboard.release_all()
+        time.sleep(sleep_time)
 
     elif keys[2].pressed:
         print('Headphones Config key pressed')
-        keybow.set_all(*black)
-        keybow.set_all(*yellow)
+        keybow.set_all(*orange)
         midi_send(2)
         headphones_config()
-        time.sleep(0.2)
-        keyboard.release_all()
+        time.sleep(sleep_time)
 
     elif keys[3].pressed:
         print('Google Meet key pressed')
+        keybow.set_all(*purple)
         keybow.keys[3].set_led(*purple)
         # Meet
         keyboard.send(Keycode.CONTROL, Keycode.D)
         # For Teams it would be: keyboard.send(Keycode.CONTROL, Keycode.SHIFT, layout.keycodes("m")[0])
-        keyboard.release_all()
-        time.sleep(0.1)
+        time.sleep(sleep_time)
 
     elif keys[4].pressed:
         print('MIDI Cable Mute key pressed')
         keybow.keys[4].set_led(*red)
         midi_send(4)
-        time.sleep(0.1)
         cable_muted = not cable_muted
+        time.sleep(sleep_time)
 
     elif keys[5].pressed:
         print('MIDI Cable Volume Down key pressed')
         keybow.keys[5].set_led(*blue)
         midi_send(5)
-        time.sleep(0.1)
 
     elif keys[6].pressed:
         print('MIDI Cable Volume Up key pressed')
         keybow.keys[6].set_led(*blue)
         midi_send(6)
-        time.sleep(0.1)
 
     elif keys[7].pressed:
         print('Previous Track key pressed')
         keybow.keys[7].set_led(*orange)
         consumer.send(ConsumerControlCode.SCAN_PREVIOUS_TRACK)
-        keyboard.release_all()
-        time.sleep(0.1)
+        time.sleep(sleep_time)
 
     elif keys[8].pressed:
         print('MIDI Headphones Mute key pressed')
         keybow.keys[8].set_led(*red)
         midi_send(8)
-        time.sleep(0.1)
         headphones_muted = not headphones_muted
+        time.sleep(sleep_time)
 
     elif keys[9].pressed:
         print('MIDI Headphones Volume Down key pressed')
         keybow.keys[9].set_led(*blue)
         midi_send(9)
-        time.sleep(0.1)
 
     elif keys[10].pressed:
         print('MIDI Headphones Volume Up key pressed')
         keybow.keys[10].set_led(*blue)
         midi_send(10)
-        time.sleep(0.1)
 
     elif keys[11].pressed:
         print('Next Track')
         keybow.keys[11].set_led(*orange)
         consumer.send(ConsumerControlCode.SCAN_NEXT_TRACK)
-        keyboard.release_all()
-        time.sleep(0.1)
+        time.sleep(sleep_time)
 
     elif keys[12].pressed:
         print('Speakers Mute key pressed')
         keybow.keys[12].set_led(*red)
         consumer.send(ConsumerControlCode.MUTE)
-        time.sleep(0.1)
         speakers_muted = not speakers_muted
+        time.sleep(sleep_time)
 
     elif keys[13].pressed:
         print('Control Volume Down key pressed')
         keybow.keys[13].set_led(*blue)
         consumer.send(ConsumerControlCode.VOLUME_DECREMENT)
-        keyboard.release_all()
 
     elif keys[14].pressed:
         print('Control Volume Up key pressed')
         keybow.keys[14].set_led(*blue)
         consumer.send(ConsumerControlCode.VOLUME_INCREMENT)
-        keyboard.release_all()
 
     elif keys[15].pressed:
         print('Control Play/Pause key pressed')
         keybow.keys[15].set_led(*green)
         consumer.send(ConsumerControlCode.PLAY_PAUSE)
-        keyboard.release_all()
-        time.sleep(0.1)
+        time.sleep(sleep_time)
