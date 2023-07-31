@@ -77,3 +77,7 @@ Use [configs/MacroButtons-Midi-keybow](configs/MacroButtons-Midi-keybow) for the
     │ │Mute        │ │Mute       │  │Mute            │  │Mute          │
     └─┴────────────┴─┴───────────┴──┴────────────────┴──┴──────────────┘
 
+
+### Todo:
+
+Add french keyboard support using [Neradoc/Circuitpython_Keyboard_Layouts](https://github.com/Neradoc/Circuitpython_Keyboard_Layouts) and its [layout generator](https://www.neradoc.me/layouts/)
