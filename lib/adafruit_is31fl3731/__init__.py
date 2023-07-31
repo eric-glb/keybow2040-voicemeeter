@@ -10,7 +10,7 @@ CircuitPython driver for the IS31FL3731 charlieplex IC.
 
 Base library.
 
-* Author(s): Tony DiCola, Melissa LeBlanc-Williams, David Glaude
+* Author(s): Tony DiCola, Melissa LeBlanc-Williams, David Glaude, E. A. Graham Jr.
 
 Implementation Notes
 --------------------
@@ -53,7 +53,9 @@ import math
 import time
 from micropython import const
 
-__version__ = "0.0.0-auto.0"
+from adafruit_bus_device.i2c_device import I2CDevice
+
+__version__ = "0.0.0+auto.0"
 __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_IS31FL3731.git"
 
 _MODE_REGISTER = const(0x00)
@@ -85,44 +87,37 @@ class IS31FL3731:
     The IS31FL3731 is an abstract class contain the main function related to this chip.
     Each board needs to define width, height and pixel_addr.
 
-    :param ~adafruit_bus_device.i2c_device i2c_device: the connected i2c bus i2c_device
-    :param address: the device address; defaults to 0x74
+    :param ~busio.I2C i2c: the connected i2c bus i2c_device
+    :param int address: the device address; defaults to 0x74
     """
 
     width = 16
     height = 9
 
-    def __init__(self, i2c, address=0x74):
-        self.i2c = i2c
-        self.address = address
+    def __init__(self, i2c, address=0x74, frames=None):
+        self.i2c_device = I2CDevice(i2c, address)
         self._frame = None
-        self._init()
+        self._init(frames=frames)
 
     def _i2c_read_reg(self, reg, result):
         # Read a buffer of data from the specified 8-bit I2C register address.
         # The provided result parameter will be filled to capacity with bytes
         # of data read from the register.
-        while not self.i2c.try_lock():
-            pass
-        try:
-            self.i2c.writeto_then_readfrom(self.address, bytes([reg]), result)
+        with self.i2c_device as i2c:
+            i2c.write_then_readinto(bytes([reg]), result)
             return result
-        finally:
-            self.i2c.unlock()
         return None
 
     def _i2c_write_reg(self, reg, data):
+        # Write a contiguous block of data (bytearray) starting at the
+        # specified I2C register address (register passed as argument).
+        self._i2c_write_block(bytes([reg]) + data)
+
+    def _i2c_write_block(self, data):
         # Write a buffer of data (byte array) to the specified I2C register
         # address.
-        while not self.i2c.try_lock():
-            pass
-        try:
-            buf = bytearray(1)
-            buf[0] = reg
-            buf.extend(data)
-            self.i2c.writeto(self.address, buf)
-        finally:
-            self.i2c.unlock()
+        with self.i2c_device as i2c:
+            i2c.write(data)
 
     def _bank(self, bank=None):
         if bank is None:
@@ -142,16 +137,21 @@ class IS31FL3731:
     def _mode(self, mode=None):
         return self._register(_CONFIG_BANK, _MODE_REGISTER, mode)
 
-    def _init(self):
+    def _init(self, frames=None):
         self.sleep(True)
-        time.sleep(0.01)  # 10 MS pause to reset.
-        self._mode(_PICTURE_MODE)
-        self.frame(0)
-        for frame in range(8):
-            self.fill(0, False, frame=frame)
-            for col in range(18):
-                self._register(frame, _ENABLE_OFFSET + col, 0xFF)
-        self.audio_sync(False)
+        # Clear config; sets to Picture Mode, no audio sync, maintains sleep
+        self._bank(_CONFIG_BANK)
+        self._i2c_write_block(bytes([0] * 14))
+        enable_data = bytes([_ENABLE_OFFSET] + [255] * 18)
+        fill_data = bytearray([0] * 25)
+        # Initialize requested frames, or all 8 if unspecified
+        for frame in frames if frames else range(8):
+            self._bank(frame)
+            self._i2c_write_block(enable_data)  # Set all enable bits
+            for row in range(6):  # Barebones quick fill() w/0
+                fill_data[0] = _COLOR_OFFSET + row * 24
+                self._i2c_write_block(fill_data)
+        self._frame = 0  # To match config bytes above
         self.sleep(False)
 
     def reset(self):
@@ -202,13 +202,18 @@ class IS31FL3731:
         """
         if fade_in is None and fade_out is None:
             self._register(_CONFIG_BANK, _BREATH2_REGISTER, 0)
-        elif fade_in is None:
+            return
+        if fade_in is None:
             fade_in = fade_out
         elif fade_out is None:
             fade_out = fade_in
-        fade_in = int(math.log(fade_in / 26, 2))
-        fade_out = int(math.log(fade_out / 26, 2))
-        pause = int(math.log(pause / 26, 2))
+
+        if fade_in != 0:
+            fade_in = int(math.log(fade_in / 26, 2))
+        if fade_out != 0:
+            fade_out = int(math.log(fade_out / 26, 2))
+        if pause != 0:
+            pause = int(math.log(pause / 26, 2))
         if not 0 <= fade_in <= 7:
             raise ValueError("Fade in out of range")
         if not 0 <= fade_out <= 7:
@@ -285,14 +290,10 @@ class IS31FL3731:
             if not 0 <= color <= 255:
                 raise ValueError("Color out of range")
             data = bytearray([color] * 25)  # Extra byte at front for address.
-            while not self.i2c.try_lock():
-                pass
-            try:
+            with self.i2c_device as i2c:
                 for row in range(6):
                     data[0] = _COLOR_OFFSET + row * 24
-                    self.i2c.writeto(self.address, data)
-            finally:
-                self.i2c.unlock()
+                    i2c.write(data)
         if blink is not None:
             data = bool(blink) * 0xFF
             for col in range(18):

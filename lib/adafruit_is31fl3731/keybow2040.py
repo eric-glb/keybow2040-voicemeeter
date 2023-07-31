@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MIT
 
 """
-`adafruit_is31fl3731.charlie_bonnet`
+`adafruit_is31fl3731.keybow2040`
 ====================================================
 
 CircuitPython driver for the IS31FL3731 charlieplex IC.
@@ -32,7 +32,7 @@ from . import IS31FL3731
 
 
 class Keybow2040(IS31FL3731):
-    """Supports the Pimoroni Keybow 2040 with 4x4 matrix of RGB LEDs """
+    """Supports the Pimoroni Keybow 2040 with 4x4 matrix of RGB LEDs"""
 
     width = 16
     height = 3
@@ -63,7 +63,6 @@ class Keybow2040(IS31FL3731):
 
     @staticmethod
     def pixel_addr(x, y):
-
         lookup = [
             (120, 88, 104),  # 0, 0
             (136, 40, 72),  # 1, 0

@@ -3,37 +3,35 @@
 #   - Visual feedback when muting/unmuting mic
 #                                  eric_glb - 2021/08/26
 #
+from pmk import PMK
+from pmk.platform.keybow2040 import Keybow2040 as Hardware
 
-import time
-import board
-from keybow2040 import Keybow2040
 import usb_hid
 from adafruit_hid.keyboard import Keyboard
 from adafruit_hid.keycode import Keycode
 from adafruit_hid.consumer_control_code import ConsumerControlCode
 from adafruit_hid.consumer_control import ConsumerControl
 
-# QWERTY: from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
-from adafruit_hid_fr.keyboard_layout_fr import KeyboardLayoutFR
-
 import usb_midi
 import adafruit_midi
 from adafruit_midi.note_off import NoteOff
 from adafruit_midi.note_on import NoteOn
 
+import time
+
+# QWERTY: from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS as KeyboardLayout
+# AZERTY: from adafruit_hid_fr.keyboard_layout_fr import KeyboardLayoutFR as KeyboardLayout
+from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS as KeyboardLayout
+
 # Set up Keybow
-i2c = board.I2C()
-keybow = Keybow2040(i2c)
+keybow = PMK(Hardware())
 keys = keybow.keys
 
-# Set up the keyboard
+# Set up the keyboard and layout
 keyboard = Keyboard(usb_hid.devices)
-consumer = ConsumerControl(usb_hid.devices)
+layout = KeyboardLayout(keyboard)
 
-# Set up the layout
-keyboard = Keyboard(usb_hid.devices)
-# QWERTY: layout = KeyboardLayoutUS(keyboard)
-layout = KeyboardLayoutFR(keyboard)
+consumer = ConsumerControl(usb_hid.devices)
 
 # Set up USB MIDI up on channel 0.
 midi = adafruit_midi.MIDI(midi_out=usb_midi.ports[1], out_channel=0)
@@ -89,7 +87,7 @@ weak_yellow = (128,128,0)
 yellow = (255,255,0)
 
 # debounce sleep time
-sleep_time = 0.5
+sleep_time = 0.2
 
 # Function for send Midi keypress
 def midi_send(key):
