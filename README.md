@@ -29,11 +29,12 @@ https://user-images.githubusercontent.com/89578893/130957119-04bb56d3-d831-4dda-
 - [Adafruit CircuitPython bundle 8.x release tag 20230731](https://github.com/adafruit/Adafruit_CircuitPython_Bundle/releases/tag/20230731)
 
 
-
 ### Debug:
 
 - Use PuTTY on Serial line COM4 (YMMV), speed 115200 bauds, or
 - Use [Thonny](https://thonny.org/) (better)
+
+**Note**: the [boot.py](./boot.py) contains information about how to re-enable the CircuitPython USB drive
 
 
 ### My VB-Audio Voice Meeter Banana settings:
